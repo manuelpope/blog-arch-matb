@@ -28,8 +28,13 @@ def _format_date(date_str: str) -> str:
 def _layout(content: str, title: str = SITE_TITLE, is_post: bool = False) -> str:
     """Wrap page content in the standard HTML document."""
     mermaid_cdn = (
-        '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js">'
-        '</script><script>mermaid.initialize({startOnLoad: true, theme: "dark"});</script>'
+        '<script src="/static/mermaid.min.js"></script>'
+        '<script>'
+        'mermaid.initialize({startOnLoad: false, theme: "dark", securityLevel: "loose"});'
+        'document.addEventListener("DOMContentLoaded", function() {'
+        '  mermaid.run({nodes: document.querySelectorAll("pre.mermaid")});'
+        '});'
+        '</script>'
         if is_post else ""
     )
     return f"""<!DOCTYPE html>
