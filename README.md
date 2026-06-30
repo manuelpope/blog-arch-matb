@@ -166,29 +166,13 @@ EXPOSE 8000
 CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-### GitHub Actions + Render
+### Render Auto-Deploy
 
-El workflow en `.github/workflows/deploy.yml` redepliega automáticamente cuando empujas cambios a `main` en `content/` o `app/`.
+Render está configurado con un webhook de GitHub — cada push a `main` redepliega automáticamente.
 
-**Secrets requeridos en GitHub** (`Settings → Secrets → Actions`):
+**Secrets requeridos en Render** (Render Dashboard → tu servicio → Environment):
 
-| Secret | Valor |
-|---|---|
-| `RENDER_API_KEY` | API key de Render (Profile → API Keys → New API Key) |
-| `RENDER_SERVICE_ID` | ID del servicio (visible en la URL del dashboard de tu servicio en Render) |
-
-**Trigger del workflow:**
-```yaml
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'content/**'
-      - 'app/**'
-      - 'requirements.txt'
-      - 'render.yaml'
-```
-Solo se redepliega cuando cambias posts, templates o lógica del servidor — no en cambios de README, workflows, etc.
+Las variables de entorno están en `.env` y en `render.yaml`.
 
 ### VPS
 
