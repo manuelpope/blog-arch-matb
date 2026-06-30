@@ -57,11 +57,11 @@ def _render_code_block(block: dict, svg: str | None) -> str:
                 f'</figure>'
             )
         # Fallback: client-side rendering when Chromium is unavailable
-        code_escaped = _html_escape(block["code"])
+        # Do NOT HTML-escape — mermaid needs raw <br/> etc. to render line breaks
         return (
             f'<figure class="mermaid-figure">'
             f'<div class="mermaid-diagram" data-fallback="true">'
-            f'<pre class="mermaid">{code_escaped}</pre>'
+            f'<pre class="mermaid">{block["code"]}</pre>'
             f'</div></figure>'
         )
 
