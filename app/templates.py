@@ -25,8 +25,13 @@ def _format_date(date_str: str) -> str:
         return str(date_str)
 
 
-def _layout(content: str, title: str = SITE_TITLE) -> str:
+def _layout(content: str, title: str = SITE_TITLE, is_post: bool = False) -> str:
     """Wrap page content in the standard HTML document."""
+    mermaid_cdn = (
+        '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js">'
+        '</script><script>mermaid.initialize({startOnLoad: true, theme: "dark"});</script>'
+        if is_post else ""
+    )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +67,7 @@ def _layout(content: str, title: str = SITE_TITLE) -> str:
     </div>
 </footer>
 <script src="/static/app.js"></script>
+{mermaid_cdn}
 </body>
 </html>"""
 
@@ -147,7 +153,7 @@ def blog_post_page(slug: str) -> str | None:
     </div>
 </article>
 """
-    return _layout(content, title=post["title"])
+    return _layout(content, title=post["title"], is_post=True)
 
 
 def about_page() -> str:
