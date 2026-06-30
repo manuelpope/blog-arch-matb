@@ -100,7 +100,7 @@ def home_page() -> str:
 <div class="container">
     <section class="hero">
         <h1>Backend systems, financial platforms, and AI.</h1>
-        <p>Senior engineer writing about distributed architecture, event-driven systems, and AI products. 7 years at JPMorgan Chase.</p>
+        <p>Senior engineer writing about distributed architecture, event-driven systems, and AI products. Wide experience of years  at JPMorgan Chase.</p>
         <div class="links">
             <a href="{AUTHOR_LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a>
             <a href="mailto:{AUTHOR_EMAIL}">Email</a>
