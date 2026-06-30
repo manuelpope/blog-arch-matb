@@ -88,19 +88,22 @@ Articles with `draft: true` are excluded from listings, RSS, and sitemap. Set `d
 
 ```
 .
-├── serve.py                 FastAPI application — renders Markdown, serves pages
-├── mermaid_renderer.py      Playwright-based Mermaid → SVG renderer with disk caching
+├── app/
+│   ├── server.py            FastAPI entry point
+│   ├── markdown.py           Markdown → HTML compiler with Pygments
+│   ├── mermaid_renderer.py  Playwright-based Mermaid → SVG (in-memory cached)
+│   ├── cache.py              Thread-safe in-memory caches
+│   ├── config.py            Env var config
+│   ├── templates.py          HTML page templates
+│   └── static/
+│       ├── style.css        Medium-style typography
+│       ├── app.js           Fullscreen modal for diagrams
+│       └── mermaid.min.js   Mermaid.js (local, no CDN)
 ├── content/
-│   └── posts/               Markdown articles (the source of truth)
-│       ├── event-driven-architecture.md
-│       └── outbox-inbox-pattern.md
-├── static/
-│   ├── style.css            Medium-style typography and layout
-│   ├── app.js               Fullscreen modal for diagrams
-│   └── diagrams/            Cached Mermaid SVG renders (auto-generated)
-├── .venv/                   Python virtual environment (not committed)
+│   └── posts/               Markdown articles
+├── render.yaml              Render deployment config
 ├── requirements.txt         Pinned Python dependencies
-└── README.md                This file
+└── README.md
 ```
 
 ## How It Works
